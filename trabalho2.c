@@ -16,7 +16,7 @@ int main() {
 
     // Cadastro dos territórios
     for (int i = 0; i < 5; i++) {
-        printf("=== Cadastrando Territorios ===\n");
+        printf("=== Cadastrando Territorios %d ===\n", i + 1);
 
         // Leitura do nome do território
         printf("Nome do territorio:\n ");
