@@ -1,0 +1,51 @@
+clientes = []
+
+#funçao que o cliente cadastras seus dados
+def cadastrar_cliente():
+nome = input("Nome:")
+cpf = input("CPF:")
+veliculo = input("Veiculo:") 
+placa = input("Placa:")
+servico = inputv("Serviço:")
+
+
+cliente = {
+"nome" : nome, 
+"cpf" : cpf,
+"veiculo" : veiculo,
+"placa" : placa,
+"servico" : servico
+}
+
+#mostra na tela o nome do cliente cadastrado
+clientes.append(cliente)
+print(f"Cliente {nome} cadastrado com sucesso! \n")
+
+
+#funçao onde lista os clientes, e caso nao temha nada na lista o if not imprime!
+def listar_clientes():
+if not clientes:
+        print("Nenhum cliente cadastrado.\n")
+        return
+    print("📋 Lista de clientes:")
+    for c in clientes:
+        print(f"Nome: {c['nome']} | CPF: {c['cpf']}")
+    print()
+
+
+#funcao onde busca os clientes cadastrados
+def buscar_cliente():
+    nome_busca = input("Digite o nome do cliente: ").lower()
+    encontrados = [
+c for c in clientes 
+if nome_busca in c['nome'].lower()]
+
+    if encontrados:
+        print("🔎 Clientes encontrados:")
+        for c in encontrados:
+            print(f"Nome: {c['nome']} | CPF: {c['cpf']}")
+    else:
+        print("❌ Nenhum cliente encontrado.\n")
+
+
+
