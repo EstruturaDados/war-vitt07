@@ -1,51 +1,100 @@
+# Cria uma lista vazia chamada clientes
+
 clientes = []
 
-#funçao que o cliente cadastras seus dados
+#=============================================================#
+# Função que cadastra os dados do cliente
 def cadastrar_cliente():
-nome = input("Nome:")
-cpf = input("CPF:")
-veliculo = input("Veiculo:") 
-placa = input("Placa:")
-servico = inputv("Serviço:")
+    # O usuario digita os dados e é armazenado em cada vairiavel
+    nome = input("Nome: ")
+    cpf = input("CPF: ")
+    veiculo = input("Veículo: ")
+    placa = input("Placa: ")
+    servico = input("Serviço: ")
 
+# dicionario com os dados do cliente
+    cliente = {
+        "nome": nome,
+        "cpf": cpf,
+        "veiculo": veiculo,
+        "placa": placa,
+        "servico": servico
+    }
+# imprime na tela que o cliente foi cadastrado com sucesso!
+    clientes.append(cliente)
+    print(f"✅ Cliente {nome} cadastrado com sucesso!\n")
 
-cliente = {
-"nome" : nome, 
-"cpf" : cpf,
-"veiculo" : veiculo,
-"placa" : placa,
-"servico" : servico
-}
-
-#mostra na tela o nome do cliente cadastrado
-clientes.append(cliente)
-print(f"Cliente {nome} cadastrado com sucesso! \n")
-
-
-#funçao onde lista os clientes, e caso nao temha nada na lista o if not imprime!
+#=============================================================#
+# Função que lista os clientes
 def listar_clientes():
-if not clientes:
-        print("Nenhum cliente cadastrado.\n")
+    if not clientes: # Esse "if not clientes" verifica se a lista está vazia. Se estiver, ele mostra a mensagem e retorna, encerrando a função.
+        print("❌ Nenhum cliente cadastrado.\n")
         return
-    print("📋 Lista de clientes:")
-    for c in clientes:
-        print(f"Nome: {c['nome']} | CPF: {c['cpf']}")
-    print()
 
+    print("📋 Lista de clientes:") # Aqui ja vai deixa os clintes na tela para o usuario!
+    for c in clientes: # O for percorre cada cliente na lista e imprime seus dados formatados.
+        print(f"Nome: {c['nome']} | CPF: {c['cpf']} | Veículo: {c['veiculo']} | Placa: {c['placa']} | Serviço: {c['servico']}") #c['nome'] valor dentro do dicionario
+    print() #============
 
-#funcao onde busca os clientes cadastrados
+#=============================================================#
+# Função que busca cliente pelo nome
 def buscar_cliente():
-    nome_busca = input("Digite o nome do cliente: ").lower()
-    encontrados = [
-c for c in clientes 
-if nome_busca in c['nome'].lower()]
+    nome_busca = input("Digite o nome do cliente: ").lower() #clinte que o usuario quer bucar / .lower() facilitaa busca, ignorando se for minuscula e maiuscula
+    encontrados = [c for c in clientes if nome_busca in c['nome'].lower()] # Aqui confesso que fiquei na duvida e peguei da internet ;D, mas ele pesquisa os nomes na lista , e nao precisa por o nome inteiro!
 
     if encontrados:
         print("🔎 Clientes encontrados:")
-        for c in encontrados:
-            print(f"Nome: {c['nome']} | CPF: {c['cpf']}")
+        for c in encontrados: # for percorre na variavel "encontrados"
+            print(f"Nome: {c['nome']} | CPF: {c['cpf']} | Veículo: {c['veiculo']}") # imprime o nome e cpf do cliente encontrado
+    else: # caso nao encontre nenhum cliente com o nome digitado
+        print("❌ Nenhum cliente encontrado.\n") 
+
+#=============================================================#
+# Função que remove cliente pelo CPF
+def remover_cliente():
+    if not clientes:
+        print("❌ Nenhum cliente cadastrado para remover.\n")
+        return
+
+    cpf_remover = input("Digite o CPF do cliente que deseja remover: ")
+
+    for cliente in clientes: #percorre na lista de clintes para encontra o cpf
+        if cliente["cpf"] == cpf_remover: #se o cliente com o cpf digitado for encontrado
+            clientes.remove(cliente) #função que remove o clinete da lista
+            print(f"🗑️ Cliente {cliente['nome']} removido com sucesso!\n") #imprime cliente removido
+            break
     else:
-        print("❌ Nenhum cliente encontrado.\n")
+        print("⚠️ Nenhum cliente encontrado com esse CPF.\n")
 
+#=============================================================#
+# MENU INTERATIVO
+def menu():
+    while True:
+        print("\n===== 🚗 MOTOR FORTE - Sistema de Cadastro =====")
+        print("1️⃣  Cadastrar cliente")
+        print("2️⃣  Listar clientes")
+        print("3️⃣  Buscar cliente")
+        print("4️⃣  Remover cliente")
+        print("5️⃣  Sair")
+        print("===============================================")
 
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            cadastrar_cliente()
+        elif opcao == "2":
+            listar_clientes()
+        elif opcao == "3":
+            buscar_cliente()
+        elif opcao == "4":
+            remover_cliente()
+        elif opcao == "5":
+            print("👋 Saindo do sistema... até logo!")
+            break
+        else:
+            print("❌ Opção inválida! Tente novamente.\n")
+
+#=============================================================#
+
+menu()
 
